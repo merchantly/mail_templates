@@ -1,0 +1,9 @@
+Order <a href="{{order.operator_url}}">N{{ order.public_id }}</a> for the amount of  {{order.total_with_delivery_price | money_with_currency }} received status "<em>{{order.workflow_state.title}}</em>"
+<br>
+<br>
+You can track the order at: <a href="{{order.client_order_url}}">{{ order.client_order_url }}</a>
+<br>
+<br>
+--
+<br>
+{{ vendor.operator_url }}

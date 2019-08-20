@@ -1,0 +1,7 @@
+The following items are out of stock for order №{{order.public_id}}:
+
+{% for good in order.run_out_goods%}
+{{forloop.index}}. {{good.title}} ({{good.article}})
+{% endfor%}
+
+Order page: {{order.operator_url}}

@@ -1,0 +1,10 @@
+Добрый день, {{ order.name }}!
+<br/>
+<br/>
+Ваш заказ <a href="{{order.client_order_url}}">N{{ order.public_id }}</a> на сумму {{order.total_with_delivery_price | money_with_currency }} получил статус <em>'{{order.workflow_state.title}}'</em>
+{% if order.date_from and order.date_till %}<br><br> Время доставки: с {{ order.date_from }} по {{ order.date_till }}{% endif %}
+<br>
+<br>
+--
+<br>
+{{ signature }}

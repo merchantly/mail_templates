@@ -1,0 +1,7 @@
+Не хватает следующих товаров для заказа №{{order.public_id}}:
+
+{% for good in order.run_out_goods %}
+{{forloop.index}}. {{ good.title }} ({{good.article}})
+{% endfor %}
+
+Страница заказа: {{order.operator_url}}

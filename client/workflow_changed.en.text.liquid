@@ -1,0 +1,9 @@
+Hello, {{ order.name }}!
+
+Your order N{{ order.public_id }} in the amount of {{order.total_with_delivery_price | money_with_currency }} was granted the status "{{order.workflow_state.title}}"{% if order.date_from and order.date_till %}. Delivery time: from {{ order.date_from }} to {{ order.date_till }}{% endif %}
+
+Track order can be reached at: {{ order.client_order_url }}
+
+--
+{{ signature }}
+{{ vendor.home_url }}

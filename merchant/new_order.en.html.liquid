@@ -1,0 +1,80 @@
+In the online store "<a href="{{order.home_url}}">{{vendor.name}}</a>" an order was made <a href="{{order.operator_url}}"> N{{order.public_id}} </a> worth {{order.total_with_delivery_price | money_with_currency}}
+<br/>
+<br/>
+
+Order Details:
+<br/>
+<table cellspacing = "0" cellpadding = "3" border = "1">
+  <thead>
+    <tr>
+      <th> Product Name </th>
+      <th> Price </th>
+      <th>
+        Quantity / Weight
+      </ th>
+      <th> Total </th>
+    </ tr>
+  </ thead>
+  <tbody>
+    {% for item in order.items %}
+    <tr>
+      <td><a href="{{ item.operator_url }}">{{ item.title }}</a></td>
+      <td> {{item.price | humanized_money_with_currency}} </td>
+      <td align = "right">
+        {% if item.selling_by_weight? %}
+          {{item.weight}} {{item.weight_unit}}
+        {% else %}
+          {{item.count}} {{item.quantity_unit}}
+        {% endif %}
+      </td>
+      <td> {{item.total_price | humanized_money_with_currency}} </td>
+    </tr>
+    {% endfor%}
+    {% if order.package_good%}
+    <tr>
+      <td><a href="{{ order.package_good.public_url }}">{{ order.package_good.title }}</a></td>
+      <td> {{order.package_good.price | humanized_money_with_currency}} </ td>
+      <td> package </td>
+      <td align="right"><strong>{{ order.package_price | humanized_money_with_currency }}</strong></td>
+    </tr>
+    {% endif%}
+  </tbody>
+  <tfoot>
+    {% if order.delivery_price> 0%}
+    <tr>
+      <td colspan="3"> <strong> Delivery price </strong> </td>
+      <td align="right"> <strong> {{order.delivery_price | humanized_money_with_currency}} </strong> </td>
+    </tr>
+    {% endif %}
+    <tr>
+      <td colspan = "3"> <strong> Total (including delivery, if any): </ strong> </td>
+      <td align = "right"> <strong> {{order.total_with_delivery_price | humanized_money_with_currency}} </strong> </td>
+    </tr>
+  </tfoot>
+</table>
+
+<br/>
+
+<p> Client Contact Details: </p>
+
+<table cellspacing = "0" cellpadding = "0">
+  <tbody>
+    <tr><td><strong> Name </strong> </td> <td> {{order.name}} </td> </tr>
+    <tr> <td> <strong> Phone </strong> </td> <td> {{order.phone}} </td> </ tr>
+    <tr> <td> <strong> Email </strong> </td> <td> {{order.email}} </td> </tr>
+    <tr> <td> <strong> Payment Method </strong> </td> <td> {{order.payment_type.title}} {% if order.payment_type.description%} <br/> <small> {{ order.payment_type.description}} </ small> {% endif%} </td> </tr>
+    <tr> <td> <strong> Delivery Method </strong> </td> <td>{{order.delivery_type.title}} </td> </tr>
+    <tr> <td> <strong> Delivery City </strong> </td> <td> {{order.city_to_delivery}} </td> </tr>
+    <tr> <td> <strong> Delivery Address </strong> </td> <td> {{order.address_to_delivery}} </td> </tr>
+    {% if order.postal_code%} <tr> <td> <strong> ZIP Code </strong> </td> <td> {{order.postal_code}} </td> </tr> {% endif%}
+    <tr> <td> <strong> Order Comment </strong> </td> <td> {{order.comment}} </td> </tr>
+  </tbody>
+</table>
+<br>
+<br>
+You can track your order at: <a href="{{order.client_order_url}}"> {{order.client_order_url}} </a>
+<br>
+<br>
+-
+<br>
+{{signature}}

@@ -1,0 +1,40 @@
+Добрый день, {{ order.name }}!
+
+В интернет-магазине "{{vendor.name}}" оформлен заказ N{{ order.public_id }} на сумму {{order.total_with_delivery_price | money_with_currency }}
+
+Контактные данные:
+Телефон: {{order.phone}}
+Email: {{order.email}}
+
+Способ оплаты: {{order.payment_type.title}}{% if order.payment_type.description %} – {{ order.payment_type.description }}{% endif %}
+
+Способ доставки: {{order.delivery_type.title}}{% if order.delivery_type.description %}. {{ order.delivery_type.description }}{% endif %}
+
+Город доставки: {{order.city_to_delivery}}
+Адрес доставки: {{order.address_to_delivery}}
+{% if order.date_from and order.date_till %}Время доставки: с {{ order.date_from }} по {{ order.date_till }}{% endif %}
+
+Детали заказа:
+{% for item in order.items %} {{forloop.index}}.  {{item.title}} ({{item.price | humanized_money_with_symbol}}, {% if item.selling_by_weight? %} {{item.weight}} {{ item.weight_unit }} {% else %} {{ item.count }} {{item.quantity_unit}} {%endif%}) = {{item.total_price | humanized_money_with_symbol}} {{ item.public_url }}
+{% endfor %}
+{% if order.package_good %}
+Упаковка: {{order.package_good.title}} ({{order.package_price | humanized_money_with_symbol }})
+{% endif %}
+{% if order.delivery_price > 0 %}
+Стоимость доставки: {{order.delivery_price | humanized_money_with_symbol}}
+{% endif %}
+Итого: {{order.total_with_delivery_price | humanized_money_with_symbol }}
+{% if order.total_vat_out %}
+Включая НДС: {{ order.total_vat_out | humanized_money_with_symbol }}
+{% endif %}
+
+{% if order.delivery_type.mail_comment %}
+  {{ order.delivery_type.mail_comment }}
+{% endif %}
+
+
+Отследить заказ можно по адресу: {{ order.client_order_url }}
+
+--
+{{ signature }}
+{{ vendor.home_url }}

@@ -1,0 +1,8 @@
+Не хватает следующих товаров для заказа <a href="{{order.operator_url}}">№{{order.public_id}}</a>:
+<br>
+<br>
+<ol>
+{% for good in order.run_out_goods %}
+  <li>{{ good.title }} ({{good.article}})</li>
+{% endfor %}
+</ol>

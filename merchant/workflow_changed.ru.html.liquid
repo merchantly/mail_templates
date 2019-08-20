@@ -1,0 +1,9 @@
+Заказ <a href="{{order.operator_url}}">N{{ order.public_id }}</a> на сумму {{order.total_with_delivery_price | money_with_currency }} получил статус "<em>{{order.workflow_state.title}}</em>"
+<br>
+<br>
+Отследить заказ можно по адресу: <a href="{{order.client_order_url}}">{{ order.client_order_url }}</a>
+<br>
+<br>
+--
+<br>
+{{ vendor.operator_url }}

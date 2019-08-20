@@ -1,0 +1,104 @@
+Добрый день, {{ order.name }}!
+<br/>
+<br/>
+В интернет-магазине "<a href="{{order.home_url}}">{{vendor.name}}</a>" оформлен заказ <a href="{{order.client_order_url}}">N{{ order.public_id }}</a> на сумму {{order.total_with_delivery_price | money_with_currency }}
+<br/>
+<br/>
+
+Детали заказа:
+<br/>
+<table cellspacing="0" cellpadding="3" border="1">
+  <thead>
+    <tr>
+      <th>Наименование товара</th>
+      <th>Цена</th>
+      <th>
+        Количество / Вес
+      </th>
+      <th>Итого</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in order.items %}
+    <tr>
+      <td><a href="{{ item.public_url }}">{{ item.title }}</a></td>
+      <td>{{ item.price | humanized_money_with_currency }}</td>
+      <td align="right">
+        {% if item.selling_by_weight? %}
+          {{ item.weight }} {{ item.weight_unit }}
+        {% else %}
+          {{ item.count }} {{item.quantity_unit}}
+        {% endif %}
+      </td>
+      <td>{{ item.total_price | humanized_money_with_currency }}</td>
+    </tr>
+    {% endfor %}
+    {% if order.package_good %}
+    <tr>
+      <td><a href="{{ order.package_good.public_url }}">{{ order.package_good.title }}</a></td>
+      <td>{{ order.package_good.price | humanized_money_with_currency }}</td>
+      <td>упаковка</td>
+      <td align="right"><strong>{{ order.package_price | humanized_money_with_currency }}</strong></td>
+    </tr>
+    {% endif %}
+  </tbody>
+  <tfoot>
+    {% if order.delivery_price > 0 %}
+    <tr>
+      <td colspan="3"><strong>Стоимость доставки</strong></td>
+      <td align="right"><strong>{{ order.delivery_price | humanized_money_with_currency }}</strong></td>
+    </tr>
+    {% endif %}
+    {% if order.coupon %}
+    <tr>
+      <td colspan="2">{{ order.coupon.code_text }}</td>
+      <td colspan="2"><p>{{ order.coupon.discount_text }}</p></td>
+    </tr>
+    {% endif %}
+    <tr>
+    <td colspan="3"><strong>Итого{% if order.delivery_price %} (включая доставку, если есть){% else %} (без доставки){% endif %}:</strong></td>
+      <td align="right"><strong style="white-space: nowrap;">{{ order.total_with_delivery_price | humanized_money_with_currency }}</strong></td>
+    </tr>
+    {% if order.total_vat_out %}
+      <tr>
+        <td colspan="3"><strong>Включая НДС:</strong></td>
+        <td align="right"><strong>{{ order.total_vat_out | humanized_money_with_currency }}</strong></td>
+      </tr>
+    {% endif %}
+  </tfoot>
+</table>
+
+<br/>
+
+<p>Контактные данные покупателя:</p>
+
+<table cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr><td><strong>Имя</strong></td><td>{{ order.name }}</td></tr>
+    <tr><td><strong>Телефон</strong></td><td>{{ order.phone }}</td></tr>
+    <tr><td><strong>Email</strong></td><td>{{ order.email }}</td></tr>
+    <tr><td valign=top><strong>Способ оплаты</strong></td><td><b>{{ order.payment_type.title }}</b>{% if order.payment_type.description %}<br/><small>{{ order.payment_type.description }}</small>{% endif %}</td></tr>
+    <tr><td valign=top><strong>Способ доставки</strong></td><td><b>{{ order.delivery_type.title }}</b>{% if order.delivery_type.description %}<br/><small>{{ order.delivery_type.description }}</small>{% endif %}</small></td></tr>
+    <tr><td><strong>Город доставки</strong></td><td>{{ order.city_to_delivery }}</td></tr>
+    <tr><td><strong>Адрес доставки</strong></td><td>{{ order.address_to_delivery }}</td></tr>
+    {% if order.date_from and order.date_till %}
+    <tr><td><strong>Время доставки</strong></td><td>с {{ order.date_from }} по {{ order.date_till }}</td></tr>
+    {% endif %}
+  </tbody>
+</table>
+{% if order.delivery_type.mail_comment %}
+  <br>
+  {{ order.delivery_type.mail_comment }}
+{% endif %}
+
+{% if order.public_invoice_url %}
+  <a href="{{ order.public_invoice_url }}">Счет на оплату перечислением</a>
+{% endif %}
+<br>
+<br>
+Отследить заказ можно по адресу: <a href="{{order.client_order_url}}">{{ order.client_order_url }}</a>
+<br>
+<br>
+--
+<br>
+{{ signature }}

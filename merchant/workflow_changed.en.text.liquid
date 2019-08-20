@@ -1,0 +1,6 @@
+Order {{ order.public_id }} for the amount of {{order.total_with_delivery_price | money_with_currency }} received page "{{order.workflow_state.title}}"
+
+Order page: {{ order.operator_url }}
+
+--
+{{ vendor.operator_url }}

@@ -1,0 +1,7 @@
+You can pay order N{{ order.public_id }} in the amount of {{ order.total_with_delivery_price | money_with_currency }}, clicking on: {{order.payment_url}}
+
+Track order can be reached at: {{ order.client_order_url }}
+
+--
+{{ signature }}
+{{ vendor.home_url }}

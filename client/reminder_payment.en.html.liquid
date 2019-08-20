@@ -1,0 +1,9 @@
+Hello, {{ order.name }}.
+<br/><br/>
+We put to you the goods under the order №{{ order.public_id }}.
+<br/><br/>
+At the expiration of the term of the reservation order will be canceled.
+<br/><br/>
+You can still pay with <a href="{{ order.payment_url }}">link</a>.
+<br/><br/>
+Sincerely, online shop {{ order.vendor.name }}. <a href="{{ order.payment_url }}">{{ order.payment_url }}</a>.

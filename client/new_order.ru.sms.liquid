@@ -1,0 +1,1 @@
+{{vendor_name}}: оформлен заказ N{{order.public_id}} на сумму {{order.total_with_delivery_price | humanized_money_with_symbol }}{% if order.delivery_type.selfdelivery? %}. Адрес самовывоза: {{order.delivery_type.pickup_address}}{% elsif order.date_from and order.date_till %}. Время доставки: с {{ order.date_from }} по {{ order.date_till }}{% endif %}

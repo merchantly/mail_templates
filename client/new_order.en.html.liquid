@@ -1,0 +1,110 @@
+Hello, {{ order.name }}!
+<br/>
+<br/>
+In the online store "<a href="{{order.home_url}}">{{vendor.name}}</a>" issued an order <a href="{{order.client_order_url}}">N{{ order.public_id }}</a> to the amount of {{order.total_with_delivery_price | money_with_currency }}
+<br/>
+<br/>
+
+Order Details:
+<br/>
+<table cellspacing="0" cellpadding="3" border="1">
+  <thead>
+    <tr>
+      <th>Name of product</th>
+      <th>Price</th>
+      <th>
+        Quantity / Weight
+      </th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in order.items %}
+    <tr>
+      <td><a href="{{ item.public_url }}">{{ item.title }}</a></td>
+      <td>{{ item.price | humanized_money_with_currency }}</td>
+      <td align="right">
+        {% if item.selling_by_weight? %}
+          {{ item.weight }} {{ item.weight_unit }}
+        {% else %}
+          {{ item.count }} {{item.quantity_unit}}
+        {% endif %}
+      </td>
+      <td>{{ item.total_price | humanized_money_with_currency }}</td>
+    </tr>
+    {% endfor %}
+    {% if order.package_good %}
+    <tr>
+      <td><a href="{{ order.package_good.public_url }}">{{ order.package_good.title }}</a></td>
+      <td>{{ order.package_good.price | humanized_money_with_currency }}</td>
+      <td>package</td>
+      <td align="right"><strong>{{ order.package_price | humanized_money_with_currency }}</strong></td>
+    </tr>
+    {% endif %}
+  </tbody>
+  <tfoot>
+    {% if order.delivery_price > 0 %}
+    <tr>
+      <td colspan="3"><strong>Cost of delivery</strong></td>
+      <td align="right"><strong>{{ order.delivery_price | humanized_money_with_currency }}</strong></td>
+    </tr>
+    {% endif %}
+    {% if order.coupon %}
+      <tr>
+        <td colspan="2">{{ order.coupon.code_text }}</td>
+        <td colspan="2"><p>{{ order.coupon.discount_text }}</p></td>
+      </tr>
+    {% endif %}
+    <tr>
+      <td colspan="3"><strong>Total (including shipping, if there is):</strong></td>
+      <td align="right"><strong>{{ order.total_with_delivery_price | humanized_money_with_currency }}</strong></td>
+    </tr>
+    {% if order.total_vat_out %}
+      <tr>
+        <td colspan="3"><strong>Total VAT:</strong></td>
+        <td align="right"><strong>{{ order.total_vat_out | humanized_money_with_currency }}</strong></td>
+      </tr>
+    {% endif %}
+  </tfoot>
+</table>
+
+<br/>
+
+<p>Buyer contact information:</p>
+
+<table cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr><td><strong>Name</strong></td><td>{{ order.name }}</td></tr>
+    <tr><td><strong>Phone</strong></td><td>{{ order.phone }}</td></tr>
+    <tr><td><strong>Email</strong></td><td>{{ order.email }}</td></tr>
+    <tr><td valign=top><strong>Payment method</strong></td><td><b>{{ order.payment_type.title }}</b>{% if order.payment_type.description %}<br/><small>{{ order.payment_type.description }}</small>{% endif %}</td></tr>
+    <tr><td valign=top><strong>Delivery method</strong></td><td><b>{{ order.delivery_type.title }}</b>{% if order.delivery_type.description %}<br/><small>{{ order.delivery_type.description }}</small>{% endif %}</small></td></tr>
+    {% if order.delivery_type.selfdelivery? %}
+    <tr><td><strong>Address ex</strong></td><td>{{ order.delivery_type.pickup_address }}</td></tr>
+    {% else %}
+    <tr><td><strong>Delivery City</strong></td><td>{{ order.city_title }}</td></tr>
+    <tr><td><strong>Delivery address</strong></td><td>{{ order.address }}</td></tr>
+    {% if order.date_from and order.date_till %}
+    <tr><td><strong>Delivery time</strong></td><td>с {{ order.date_from }} по {{ order.date_till }}</td></tr>
+    {% endif %}
+    {% endif %}
+  </tbody>
+</table>
+{% if order.delivery_type.mail_comment %}
+  <br>
+  <br>
+  {{ order.delivery_type.mail_comment }}
+{% endif %}
+<br>
+<br>
+Track order can be reached at: <a href="{{order.client_order_url}}">{{ order.client_order_url }}</a>
+<br>
+<br>
+{% if order.must_be_paid_online? %}
+Link to <a href="{{ order.payment_url }}">Pay now</a> by {{ order.payment_type.title }}
+{% endif %}
+<br>
+<br>
+--
+<br>
+{{ signature }}
