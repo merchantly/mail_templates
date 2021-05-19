@@ -50,10 +50,10 @@ Order Details:
       <td colspan = "3"> <strong> Total (including delivery, if any): </ strong> </td>
       <td align = "right"> <strong> {{order.total_with_delivery_price | humanized_money_with_currency}} </strong> </td>
     </tr>
-    {% if order.total_vat_out %}
+    {% if order.total_vat %}
       <tr>
         <td colspan="3"><strong>Total VAT:</strong></td>
-        <td align="right"><strong>{{ order.total_vat_out | humanized_money_with_currency }}</strong></td>
+        <td align="right"><strong>{{ order.total_vat | humanized_money_with_currency }}</strong></td>
       </tr>
     {% endif %}
   </tfoot>

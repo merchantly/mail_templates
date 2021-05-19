@@ -50,10 +50,10 @@
       <td colspan="3"><strong>Итого (включая доставку, если есть):</strong></td>
       <td align="right"><strong>{{ order.total_with_delivery_price | humanized_money_with_currency }}</strong></td>
     </tr>
-    {% if order.total_vat_out %}
+    {% if order.total_vat %}
       <tr>
         <td colspan="3"><strong>Включая НДС:</strong></td>
-        <td align="right"><strong>{{ order.total_vat_out | humanized_money_with_currency }}</strong></td>
+        <td align="right"><strong>{{ order.total_vat | humanized_money_with_currency }}</strong></td>
       </tr>
     {% endif %}
   </tfoot>
