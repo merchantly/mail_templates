@@ -64,6 +64,10 @@ Order Details:
         <td colspan="3"><strong>Total VAT:</strong></td>
         <td align="right"><strong>{{ order.total_vat | humanized_money_with_currency }}</strong></td>
       </tr>
+        <tr>
+          <td colspan="3"><strong>Total without VAT:</strong></td>
+          <td align="right"><strong>{{ order.total_without_vat_price | humanized_money_with_currency }}</strong></td>
+        </tr>
     {% endif %}
   </tfoot>
 </table>
