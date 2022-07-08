@@ -1,7 +1,7 @@
 Hello, {{ order.name }}!
 <br/>
 <br/>
-In the online store "<a href="{{order.home_url}}">{{vendor.name}}</a>" issued an order <a href="{{order.client_order_url}}">N{{ order.public_id }}</a> to the amount of {{order.total_with_delivery_price | money_with_currency }}
+In the online store "{{vendor.name}}" issued an order N{{ order.public_id }} to the amount of {{order.total_with_delivery_price | money_with_currency }}
 <br/>
 <br/>
 
@@ -99,9 +99,6 @@ Order Details:
   <br>
   {{ order.delivery_type.mail_comment }}
 {% endif %}
-<br>
-<br>
-Track order can be reached at: <a href="{{order.client_order_url}}">{{ order.client_order_url }}</a>
 <br>
 <br>
 {% if order.must_be_paid_online? %}
