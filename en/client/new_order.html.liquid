@@ -21,7 +21,7 @@ Order Details:
   <tbody>
     {% for item in order.items %}
     <tr>
-      <td><a href="{{ item.public_url }}">{{ item.title }}</a></td>
+      <td><p>{{ item.title }}</p></td>
       <td>{{ item.price | humanized_money_with_currency }}</td>
       <td align="right">
         {% if item.selling_by_weight? %}
@@ -35,7 +35,7 @@ Order Details:
     {% endfor %}
     {% if order.package_good %}
     <tr>
-      <td><a href="{{ order.package_good.public_url }}">{{ order.package_good.title }}</a></td>
+      <td><p>{{ order.package_good.title }}</p></td>
       <td>{{ order.package_good.price | humanized_money_with_currency }}</td>
       <td>package</td>
       <td align="right"><strong>{{ order.package_price | humanized_money_with_currency }}</strong></td>
