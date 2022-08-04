@@ -10,7 +10,7 @@ Order Details:
       <th> Product Name </th>
       <th> Price </th>
       <th>
-        Quantity / Weight
+        Quantity
       </ th>
       <th> Total </th>
     </ tr>
@@ -52,7 +52,7 @@ Order Details:
     </tr>
     {% if order.total_vat %}
       <tr>
-        <td colspan="3"><strong>Total VAT:</strong></td>
+        <td colspan="3"><strong>Total VAT (%):</strong></td>
         <td align="right"><strong>{{ order.total_vat | humanized_money_with_currency }}</strong></td>
       </tr>
     {% endif %}
@@ -68,7 +68,7 @@ Order Details:
     <tr><td><strong> Name </strong> </td> <td> {{order.name}} </td> </tr>
     <tr> <td> <strong> Phone </strong> </td> <td> {{order.phone}} </td> </ tr>
     <tr> <td> <strong> Email </strong> </td> <td> {{order.email}} </td> </tr>
-    <tr> <td> <strong> Payment Method </strong> </td> <td> {{order.payment_type.title}} {% if order.payment_type.description%} <br/> <small> {{ order.payment_type.description}} </ small> {% endif%} </td> </tr>
+    <tr> <td style=“padding-left:5px;padding-right:5px;”> <strong> Payment Method </strong> </td> <td> {{order.payment_type.title}} {% if order.payment_type.description%} <br/> <small> {{ order.payment_type.description}} </ small> {% endif%} </td> </tr>
     <tr> <td> <strong> Delivery Method </strong> </td> <td>{{order.delivery_type.title}} </td> </tr>
     <tr> <td> <strong> Delivery City </strong> </td> <td> {{order.city_to_delivery}} </td> </tr>
     <tr> <td> <strong> Delivery Address </strong> </td> <td> {{order.address_to_delivery}} </td> </tr>
