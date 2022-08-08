@@ -11,10 +11,10 @@ Order Details:
       <th> Price </th>
       <th>
         Quantity
-      </ th>
+      </th>
       <th> Total </th>
-    </ tr>
-  </ thead>
+    </tr>
+  </thead>
   <tbody>
     {% for item in order.items %}
     <tr>
@@ -33,7 +33,7 @@ Order Details:
     {% if order.package_good%}
     <tr>
       <td><a href="{{ order.package_good.public_url }}">{{ order.package_good.title }}</a></td>
-      <td> {{order.package_good.price | humanized_money_with_currency}} </ td>
+      <td> {{order.package_good.price | humanized_money_with_currency}} </td>
       <td> package </td>
       <td align="right"><strong>{{ order.package_price | humanized_money_with_currency }}</strong></td>
     </tr>
@@ -42,13 +42,13 @@ Order Details:
   <tfoot>
     {% if order.delivery_price> 0%}
     <tr>
-      <td colspan="3"> <strong> Delivery price </strong> </td>
-      <td align="right"> <strong> {{order.delivery_price | humanized_money_with_currency}} </strong> </td>
+      <td colspan="3"><strong>Delivery price</strong></td>
+      <td align="right"><strong>{{order.delivery_price | humanized_money_with_currency}}</strong></td>
     </tr>
     {% endif %}
     <tr>
-      <td colspan = "3"> <strong> Total (including delivery, if any): </ strong> </td>
-      <td align = "right"> <strong> {{order.total_with_delivery_price | humanized_money_with_currency}} </strong> </td>
+      <td colspan = "3"><strong>Total (including delivery, if any):</strong></td>
+      <td align = "right"><strong>{{order.total_with_delivery_price | humanized_money_with_currency}}</strong></td>
     </tr>
     {% if order.total_vat %}
       <tr>
@@ -66,9 +66,9 @@ Order Details:
 <table cellspacing = "0" cellpadding = "0">
   <tbody>
     <tr><td><strong> Name </strong> </td> <td> {{order.name}} </td> </tr>
-    <tr> <td> <strong> Phone </strong> </td> <td> {{order.phone}} </td> </ tr>
+    <tr> <td> <strong> Phone </strong> </td> <td> {{order.phone}} </td> </tr>
     <tr> <td> <strong> Email </strong> </td> <td> {{order.email}} </td> </tr>
-    <tr> <td style=“padding-left:5px;padding-right:5px;”> <strong> Payment Method </strong> </td> <td> {{order.payment_type.title}} {% if order.payment_type.description%} <br/> <small> {{ order.payment_type.description}} </ small> {% endif%} </td> </tr>
+    <tr> <td style=“padding-left:5px;padding-right:5px;”> <strong> Payment Method </strong> </td> <td> {{order.payment_type.title}} {% if order.payment_type.description%} <br/> <small> {{ order.payment_type.description}} </small> {% endif%} </td> </tr>
     <tr> <td> <strong> Delivery Method </strong> </td> <td>{{order.delivery_type.title}} </td> </tr>
     <tr> <td> <strong> Delivery City </strong> </td> <td> {{order.city_to_delivery}} </td> </tr>
     <tr> <td> <strong> Delivery Address </strong> </td> <td> {{order.address_to_delivery}} </td> </tr>
