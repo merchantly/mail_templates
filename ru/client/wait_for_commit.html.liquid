@@ -1,0 +1,9 @@
+Добрый день, {{ order.name }}!
+<br/>
+<br/>
+Ваш заказ <a href="{{order.client_order_url}}">N{{ order.public_id }}</a> на сумму {{order.total_with_delivery_price | money_with_currency }} одобрен платежной системой и ожидает подтверждение от магазина.
+<br>
+<br>
+--
+<br>
+{{ signature }}
