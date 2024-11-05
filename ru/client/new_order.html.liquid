@@ -13,9 +13,7 @@
       <th>Наименование товара</th>
       <th>Детали</th>
       <th>Цена</th>
-      <th>
-        Количество / Вес
-      </th>
+      <th>Количество / Вес</th>
       <th>Итого</th>
     </tr>
   </thead>
@@ -37,7 +35,7 @@
     {% endfor %}
     {% if order.package_good %}
     <tr>
-      <td><a href="{{ order.package_good.public_url }}">{{ order.package_good.title }}</a></td>
+      <td colspan="2"><a href="{{ order.package_good.public_url }}">{{ order.package_good.title }}</a></td>
       <td>{{ order.package_good.price | humanized_money_with_currency }}</td>
       <td>упаковка</td>
       <td align="right"><strong>{{ order.package_price | humanized_money_with_currency }}</strong></td>
@@ -47,23 +45,23 @@
   <tfoot>
     {% if order.delivery_price > 0 %}
     <tr>
-      <td colspan="3"><strong>Стоимость доставки</strong></td>
+      <td colspan="4"><strong>Стоимость доставки</strong></td>
       <td align="right"><strong>{{ order.delivery_price | humanized_money_with_currency }}</strong></td>
     </tr>
     {% endif %}
     {% if order.coupon %}
     <tr>
-      <td colspan="2">{{ order.coupon.code_text }}</td>
-      <td colspan="2"><p>{{ order.coupon.discount_text }}</p></td>
+      <td colspan="5">{{ order.coupon.code_text }}</td>
+      <td colspan="5"><p>{{ order.coupon.discount_text }}</p></td>
     </tr>
     {% endif %}
     <tr>
-    <td colspan="3"><strong>Итого{% if order.delivery_price %} (включая доставку, если есть){% else %} (без доставки){% endif %}:</strong></td>
-      <td align="right"><strong style="white-space: nowrap;">{{ order.total_with_delivery_price | humanized_money_with_currency }}</strong></td>
+    <td colspan="4"><strong>Итого{% if order.delivery_price %} (включая доставку, если есть){% else %} (без доставки){% endif %}:</strong></td>
+    <td align="right"><strong style="white-space: nowrap;">{{ order.total_with_delivery_price | humanized_money_with_currency }}</strong></td>
     </tr>
     {% if order.total_vat %}
       <tr>
-        <td colspan="3"><strong>Включая НДС:</strong></td>
+        <td colspan="4"><strong>Включая НДС:</strong></td>
         <td align="right"><strong>{{ order.total_vat | humanized_money_with_currency }}</strong></td>
       </tr>
     {% endif %}
