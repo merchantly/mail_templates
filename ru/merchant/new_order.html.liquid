@@ -8,6 +8,7 @@
   <thead>
     <tr>
       <th>Наименование товара</th>
+      <th>Детали</th>
       <th>Цена</th>
       <th>
         Количество / Вес
@@ -19,6 +20,7 @@
     {% for item in order.items %}
     <tr>
       <td><a href="{{ item.operator_url }}">{{ item.title }}</a></td>
+      <td>{{ item.custom_attributes }}</a></td>
       <td>{{ item.price | humanized_money_with_currency }}</td>
       <td align="right">
         {% if item.selling_by_weight? %}
