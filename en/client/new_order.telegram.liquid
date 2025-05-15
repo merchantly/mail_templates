@@ -1,0 +1,1 @@
+ {{vendor.name}}: issued an order N{{order.public_id}} to the amount of {{order.total_with_delivery_price | humanized_money_with_symbol }}{% if order.delivery_type.selfdelivery? %}. Address ex: {{order.delivery_type.pickup_address}}{% elsif order.date_from and order.date_till %}. Delivery time: from {{ order.date_from }} to {{ order.date_till }}{% endif %}

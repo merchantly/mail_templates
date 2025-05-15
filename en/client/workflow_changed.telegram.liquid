@@ -1,0 +1,1 @@
+{{vendor.name}}: Order N{{order.public_id}} was granted the status "{{order.workflow_state.title}}"{% if order.date_from and order.date_till %}. Delivery time: from {{ order.date_from }} to {{ order.date_till }}{% endif %}

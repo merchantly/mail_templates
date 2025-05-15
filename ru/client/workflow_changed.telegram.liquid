@@ -1,0 +1,1 @@
+{{vendor.name}}: Заказ {{order.public_id}} получил статус "{{order.workflow_state.title}}"{% if order.date_from and order.date_till %}. Время доставки: с {{ order.date_from }} по {{ order.date_till }}{% endif %}
