@@ -1,1 +1,3 @@
-{{vendor_name}}: оформлен заказ N{{order.public_id}} на сумму {{order.total_with_delivery_price | humanized_money_with_symbol }}{% if order.delivery_type.selfdelivery? %}. Адрес самовывоза: {{order.delivery_type.pickup_address}} {% else %}. Способ доставки: {{order.delivery_type.title}}{% endif %}
+{{vendor_name}}: оформлен заказ {{order.public_id}} на сумму {{order.total_with_delivery_price | humanized_money_with_symbol }}
+{% if order.delivery_type.selfdelivery? %}. Адрес самовывоза: {{order.delivery_type.pickup_address}} {% else %}. Способ доставки: {{order.delivery_type.title}}{% endif %}
+{{order.operator_url}}
