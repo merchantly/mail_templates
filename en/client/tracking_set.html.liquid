@@ -1,0 +1,7 @@
+<p>Hello, {{ order.name }}!</p>
+<p>Your order #{{ order.public_id }} has been shipped.</p>
+<p><strong>Tracking number:</strong> {{ order.tracking_id }}</p>
+{% if order.tracking_url %}
+<p><a href="{{ order.tracking_url }}">Track delivery</a></p>
+{% endif %}
+<p>{{ signature }}</p>

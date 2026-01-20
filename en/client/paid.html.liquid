@@ -1,3 +1,8 @@
 <h3>
   <a href="{{ order.client_order_url }}">Order №{{ order.public_id }} has been paid.</a>
 </h3>
+{% if order.tracking_id %}
+<hr>
+<p>Tracking number: {{ order.tracking_id }}</p>
+{% if order.tracking_url %}<p><a href="{{ order.tracking_url }}">Track</a></p>{% endif %}
+{% endif %}

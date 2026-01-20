@@ -1,8 +1,13 @@
 Hello, {{ order.name }}!
 <br/>
 <br/>
-Your order <a href="{{order.client_order_url}}">N{{ order.public_id }}</a> in the amount of {{order.total_with_elivery_price | money_with_currency }} was granted the status <em>'{{order.workflow_state.title}}'</em>
+Your order <a href="{{order.client_order_url}}">N{{ order.public_id }}</a> in the amount of {{order.total_with_delivery_price | money_with_currency }} was granted the status <em>'{{order.workflow_state.title}}'</em>
 {% if order.date_from and order.date_till %}<br><br> Delivery time: from {{ order.date_from }} to {{ order.date_till }}{% endif %}
+{% if order.tracking_id %}
+<hr>
+<p>Tracking number: {{ order.tracking_id }}</p>
+{% if order.tracking_url %}<p><a href="{{ order.tracking_url }}">Track</a></p>{% endif %}
+{% endif %}
 <br>
 <br>
 --

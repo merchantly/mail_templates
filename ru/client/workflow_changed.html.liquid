@@ -3,6 +3,11 @@
 <br/>
 Ваш заказ <a href="{{order.client_order_url}}">N{{ order.public_id }}</a> на сумму {{order.total_with_delivery_price | money_with_currency }} получил статус <em>'{{order.workflow_state.title}}'</em>
 {% if order.date_from and order.date_till %}<br><br> Время доставки: с {{ order.date_from }} по {{ order.date_till }}{% endif %}
+{% if order.tracking_id %}
+<hr>
+<p>Трек-номер: {{ order.tracking_id }}</p>
+{% if order.tracking_url %}<p><a href="{{ order.tracking_url }}">Отследить</a></p>{% endif %}
+{% endif %}
 <br>
 <br>
 --

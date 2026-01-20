@@ -1,0 +1,7 @@
+<p>Здравствуйте, {{ order.name }}!</p>
+<p>Ваш заказ #{{ order.public_id }} передан в службу доставки.</p>
+<p><strong>Трек-номер:</strong> {{ order.tracking_id }}</p>
+{% if order.tracking_url %}
+<p><a href="{{ order.tracking_url }}">Отследить доставку</a></p>
+{% endif %}
+<p>{{ signature }}</p>
